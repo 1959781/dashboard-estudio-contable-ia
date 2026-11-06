@@ -1,0 +1,224 @@
+{
+  "name": "Flujo Auditoria Contable n8n - M365 & Claude Haiku",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9,13,18 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "4f3c6a2d-cff0-4b12-8c29-00357e9c9758",
+      "name": "Ejecucion Horaria (9 a 19 hs)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{00000000-0001-0000-0000-000000000000}",
+          "cachedResultName": "Carga_Operativa_Junior"
+        },
+        "options": {}
+      },
+      "id": "7ccaac1a-499c-4641-8ccb-49aed80e797b",
+      "name": "Leer Tabla Operativa Junior",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Enmascara datos sensibles antes de enviarlos a la IA\nconst rows = $input.all().map(i => i.json).filter(r => Object.keys(r).length > 0);\n\nconst mask = (v) => {\n  if (typeof v !== 'string') return v;\n  return v\n    .replace(/[\\w.+-]+@[\\w-]+\\.[\\w.]+/g, '[EMAIL]')\n    .replace(/\\b\\d{2}-?\\d{8}-?\\d\\b/g, '[CUIT]')\n    .replace(/\\b(?:\\d[ -]?){13,19}\\b/g, '[TARJETA/CBU]')\n    .replace(/\\b\\d{1,2}\\.?\\d{3}\\.?\\d{3}\\b/g, '[DNI]');\n};\n\nconst sensibles = /(cuit|cuil|dni|documento|email|mail|correo|telefono|tel|celular|cbu|alias|tarjeta|direccion|domicilio|clave|password|contrase|usuario|token)/i;\n\nconst limpias = rows.map((r, idx) => {\n  const out = { fila: idx + 1 };\n  for (const [k, v] of Object.entries(r)) {\n    out[k] = sensibles.test(k) ? '[OCULTO]' : mask(v);\n  }\n  return out;\n});\n\nreturn [{ json: { total_filas: limpias.length, datos: JSON.stringify(limpias) } }];"
+      },
+      "id": "545572cf-01d9-457d-9bbd-0155ec12f754",
+      "name": "Sanitizar Datos & Privacidad",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-haiku-5-5",
+          "cachedResultName": "claude-haiku-5-5"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Auditá estas {{ $json.total_filas }} filas de la tabla operativa contable cargada por un junior:\n\n{{ $json.datos }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "Sos un auditor contable senior argentino. Revisá los registros buscando: campos obligatorios vacíos, montos negativos o atípicos, filas duplicadas, fechas inválidas o futuras, descuadres entre Debe y Haber, conceptos ambiguos y errores de tipeo. Respondé SOLO con un JSON válido, sin texto extra ni bloques de código, con esta forma exacta: {\"nivel_riesgo\":\"bajo|medio|alto\",\"cantidad_alertas\":0,\"resumen\":\"texto breve en español\",\"hallazgos\":[{\"fila\":1,\"problema\":\"...\",\"sugerencia\":\"...\"}]}",
+          "maxTokens": 16000
+        }
+      },
+      "id": "e8321844-5fbc-442e-827a-3affe83c4a99",
+      "name": "Auditoria IA (Claude Haiku)",
+      "type": "@n8n/n8n-nodes-langchain.anthropic",
+      "typeVersion": 1,
+      "position": [
+        672,
+        0
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": null,
+          "name": "Gateway credits",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const r = $input.first().json;\nlet text = '';\nif (Array.isArray(r.content)) {\n  text = r.content.filter(b => b && b.type === 'text').map(b => b.text).join('');\n} else if (typeof r.content === 'string') {\n  text = r.content;\n} else if (typeof r.text === 'string') {\n  text = r.text;\n}\ntext = text.replace(/^\\s*```(?:json)?/i, '').replace(/```\\s*$/, '').trim();\n\nlet d;\ntry {\n  d = JSON.parse(text);\n} catch (e) {\n  const m = text.match(/\\{[\\s\\S]*\\}/);\n  try { d = m ? JSON.parse(m[0]) : null; } catch (e2) { d = null; }\n}\nif (!d) d = { nivel_riesgo: 'desconocido', cantidad_alertas: 0, resumen: 'No se pudo interpretar la respuesta de la IA', hallazgos: [] };\n\nconst hallazgos = Array.isArray(d.hallazgos) ? d.hallazgos : [];\n\n// Conteo de tareas por ESTADO_GENERAL (1 = completo, 2 = en proceso, 3 = sin comenzar)\nconst filas = $('Leer Tabla Operativa Junior').all().map(i => i.json).filter(r => r.ID_Empresa !== undefined && r.ID_Empresa !== '');\nconst estado = (r) => Number(r.ESTADO_GENERAL);\nconst total = filas.length;\nconst completadas = filas.filter(r => estado(r) === 1).length;\nconst enProceso = filas.filter(r => estado(r) === 2).length;\nconst sinComenzar = filas.filter(r => estado(r) === 3).length;\nconst pct = total > 0 ? Math.round(((enProceso + sinComenzar) / total) * 100) / 100 : 0;\n\nreturn [{ json: {\n  fecha_hora: $now.setZone('America/Argentina/Buenos_Aires').toFormat('yyyy-MM-dd HH:mm'),\n  total_empresas: total,\n  tareas_completadas: completadas,\n  tareas_en_proceso: enProceso,\n  tareas_sin_comenzar: sinComenzar,\n  pct_pendiente: pct,\n  cantidad_alertas: Number(d.cantidad_alertas ?? hallazgos.length) || hallazgos.length,\n  nivel_riesgo_predominante: String(d.nivel_riesgo || 'desconocido').toUpperCase(),\n  resumen_claude: d.resumen || '',\n} }];"
+      },
+      "id": "73e41992-5c9e-4ca8-ab7b-41fa7c002609",
+      "name": "Parsear Diagnostico IA",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "append",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "list",
+          "value": "{457DED40-6130-44DB-8296-967EED40C2CC}",
+          "cachedResultName": "historico"
+        },
+        "dataMode": "autoMap",
+        "options": {}
+      },
+      "id": "615d8e00-92b6-4c1d-99b9-de191305f221",
+      "name": "Guardar Snapshot Historico",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        1248,
+        0
+      ],
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Ejecucion Horaria (9 a 19 hs)": {
+      "main": [
+        [
+          {
+            "node": "Leer Tabla Operativa Junior",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Tabla Operativa Junior": {
+      "main": [
+        [
+          {
+            "node": "Sanitizar Datos & Privacidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sanitizar Datos & Privacidad": {
+      "main": [
+        [
+          {
+            "node": "Auditoria IA (Claude Haiku)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auditoria IA (Claude Haiku)": {
+      "main": [
+        [
+          {
+            "node": "Parsear Diagnostico IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear Diagnostico IA": {
+      "main": [
+        [
+          {
+            "node": "Guardar Snapshot Historico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b03c2d56-aecd-4bc8-82d8-cf69843c806e",
+  "meta": {
+    "instanceId": "4e5e1fe020513dd77bded423b5cb97510cb4c1602c7b98ae070d9fd30beb34cc"
+  },
+  "nodeGroups": [],
+  "id": "LU99XaPHeJr7iVB1",
+  "tags": []
+}

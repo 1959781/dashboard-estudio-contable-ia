@@ -1,0 +1,489 @@
+{
+  "name": "Tablero de Control - Vasos de Avance",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "tablero-auditoria",
+        "responseMode": "responseNode",
+        "options": {
+          "ignoreBots": true
+        }
+      },
+      "id": "a62e8456-1cb5-486a-b378-f6bf0c280603",
+      "name": "Abrir Tablero (link)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "1891daa5-ff27-4edc-a972-2a8de5095926"
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{00000000-0001-0000-0000-000000000000}",
+          "cachedResultName": "Carga_Operativa_Junior"
+        },
+        "options": {}
+      },
+      "id": "78fee47c-f085-432a-acdc-15d4587e8902",
+      "name": "Leer Carga Operativa",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{457DED40-6130-44DB-8296-967EED40C2CC}",
+          "cachedResultName": "historico"
+        },
+        "options": {}
+      },
+      "id": "6477a06d-c047-40b9-a062-4ad0a55196c6",
+      "name": "Leer Historico",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        0
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{E23CF4B7-5642-4E56-BF3A-88B76663C7E9}",
+          "cachedResultName": "Balances"
+        },
+        "options": {}
+      },
+      "id": "c926c01d-2436-4328-a7a2-f4347eba2081",
+      "name": "Leer Balances",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        0
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{6AA30A7E-BEFE-40C7-83F9-8400D72AF52A}",
+          "cachedResultName": "Balances_Documentacion"
+        },
+        "options": {}
+      },
+      "id": "9d890ff3-8554-4f8b-b50d-d7ed764e9aca",
+      "name": "Leer Documentacion Balances",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        0
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{FB546B5C-3C6F-4118-846F-65467AA474D0}",
+          "cachedResultName": "Sueldos"
+        },
+        "options": {}
+      },
+      "id": "345362c8-f679-4e3c-a843-b5951f0218ff",
+      "name": "Leer Sueldos",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        0
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{984254B8-2A3F-4A1A-8B1C-6B5236E95ED8}",
+          "cachedResultName": "Inspecciones"
+        },
+        "options": {}
+      },
+      "id": "a73201f6-1de8-4948-ba34-89d8d6f64109",
+      "name": "Leer Inspecciones",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        0
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{04661A0F-8351-4410-99E1-BD4C7895776B}",
+          "cachedResultName": "Monotributos"
+        },
+        "options": {}
+      },
+      "id": "ca1aa68f-5ab1-41e6-874a-c1c7e1156d61",
+      "name": "Leer Monotributos",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        1568,
+        0
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "readRows",
+        "workbook": {
+          "__rl": true,
+          "mode": "id",
+          "value": "01XDUYG2NTJSODV34V7FAJLHT5F5KXZYZ3",
+          "cachedResultName": "auditoria_contable_junior"
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "id",
+          "value": "{79D7D33B-722A-4F7F-B128-9987140E7080}",
+          "cachedResultName": "Calendario_ARCA"
+        },
+        "options": {}
+      },
+      "id": "6e7c9ed7-c58f-4a6a-ba53-10f8a640856b",
+      "name": "Leer Calendario ARCA",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.2,
+      "position": [
+        1792,
+        0
+      ],
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftExcelOAuth2Api": {
+          "id": "nG6B5t9WDqQS5J39",
+          "name": "Microsoft Excel account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Tablero de Control Contable y Auditoría v3 – 6 tarjetas, pensado primero para celular.\n// Regla general: solo se muestran acciones hechas por el estudio. Nunca nombres, CUIT completo ni claves.\nconst leer = (n) => { try { return $(n).all().map(i => i.json); } catch (e) { return []; } };\nconst vacio = (r) => Object.keys(r).length === 0;\nconst carga = leer('Leer Carga Operativa').filter(r => r.ID_Empresa !== undefined && r.ID_Empresa !== '');\nconst hist = leer('Leer Historico').filter(r => r.fecha_hora !== undefined && r.fecha_hora !== '');\nconst bal = leer('Leer Balances').filter(r => r.CUIT);\nconst doc = leer('Leer Documentacion Balances').filter(r => r.CUIT);\nconst sue = leer('Leer Sueldos').filter(r => r.CUIT);\nconst ins = leer('Leer Inspecciones').filter(r => r.codigo_inspeccion);\nconst mono = leer('Leer Monotributos').filter(r => r.CUIT);\nconst cal = leer('Leer Calendario ARCA').filter(r => r.impuesto);\nconst ult = hist.length ? hist[hist.length - 1] : {};\nconst HOY = $now.setZone('America/Argentina/Buenos_Aires').toFormat('yyyy-MM-dd');\n\n// ---------- utilidades ----------\nconst esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;');\nconst si = (v) => String(v || '').trim().toLowerCase().replace('í', 'i') === 'si';\nconst p2 = (n) => String(n).padStart(2, '0');\nconst iso = (v) => {\n  if (typeof v === 'number') { const d = new Date(Math.round((v - 25569) * 86400000)); return d.getUTCFullYear() + '-' + p2(d.getUTCMonth() + 1) + '-' + p2(d.getUTCDate()); }\n  const s = String(v || '').replace(/^'/, '').trim();\n  const m = s.match(/^(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})/);\n  if (m) return m[3] + '-' + p2(m[2]) + '-' + p2(m[1]);\n  return s.slice(0, 10);\n};\nconst dmy = (v) => { const s = iso(v); return s.length === 10 ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) : '-'; };\nconst fmtHora = (v) => {\n  if (typeof v === 'number') { const d = new Date(Math.round((v - 25569) * 86400000)); return p2(d.getUTCDate()) + '/' + p2(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear() + ' ' + p2(d.getUTCHours()) + ':' + p2(d.getUTCMinutes()); }\n  return v ? String(v) : '-';\n};\nconst pct = (a, b) => b ? Math.round((a / b) * 100) : null;\n\n// Código de cliente: 3 letras del apellido o razón social + últimos 4 dígitos del CUIT (duplicados: b, c...)\nconst codigos = {}; const usados = {};\nconst codigo = (nombre, cuit) => {\n  const dig = String(cuit || '').replace(/\\D/g, '');\n  if (codigos[dig]) return codigos[dig];\n  let letras = String(nombre || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^a-z]/g, '').slice(0, 3);\n  if (letras.length < 3) letras = (letras + 'xxx').slice(0, 3);\n  let c = letras + dig.slice(-4);\n  if (usados[c]) { usados[c]++; c = c + String.fromCharCode(96 + usados[c]); } else { usados[c] = 1; }\n  codigos[dig] = c; return c;\n};\n\n// Color en degradé según % pendiente: 0 verde flúor, 25 verde claro, 50 amarillo, 75 naranja, 100 rojo\nconst STOPS = [[0, [57, 255, 20]], [25, [156, 204, 101]], [50, [253, 216, 53]], [75, [251, 140, 0]], [100, [229, 57, 53]]];\nconst color = (p) => {\n  if (p == null) return '#bdbdbd';\n  for (let i = 1; i < STOPS.length; i++) {\n    if (p <= STOPS[i][0]) {\n      const a = STOPS[i - 1], b = STOPS[i], t = (p - a[0]) / (b[0] - a[0]);\n      const c = a[1].map((x, k) => Math.round(x + (b[1][k] - x) * t));\n      return 'rgb(' + c.join(',') + ')';\n    }\n  }\n  return 'rgb(229,57,53)';\n};\nconst estado = (p) => p == null ? 'Sin datos todavía' : (p === 0 ? 'Al día' : (p <= 25 ? 'Casi listo' : (p <= 50 ? 'En marcha' : (p <= 75 ? 'Atrasado' : 'Crítico'))));\n\nlet gid = 0;\nconst vaso = (p, tam) => {\n  gid++;\n  const h = 120, top = 20, fondo = 112, alto = fondo - top;\n  const nivel = p == null ? 0 : Math.max(0, Math.min(100, p));\n  const y = top + alto * (1 - nivel / 100);\n  const col = color(p);\n  const w = tam || 74;\n  const interior = 'M16 12 L74 12 L74 106 Q74 112 68 112 L22 112 Q16 112 16 106 Z';\n  const marcas = [25, 50, 75].map(m => { const ym = top + alto * (1 - m / 100); return '<line x1=\"54\" y1=\"' + ym + '\" x2=\"74\" y2=\"' + ym + '\" stroke=\"#5d5d5d\" stroke-width=\"1.5\"/><line x1=\"64\" y1=\"' + (ym - alto / 8) + '\" x2=\"74\" y2=\"' + (ym - alto / 8) + '\" stroke=\"#8a8a8a\" stroke-width=\"1\"/>'; }).join('');\n  return '<svg class=\"vaso\" width=\"' + w + '\" viewBox=\"0 0 90 ' + h + '\" aria-hidden=\"true\">' +\n    '<defs><clipPath id=\"c' + gid + '\"><path d=\"' + interior + '\"/></clipPath></defs>' +\n    '<path d=\"' + interior + '\" fill=\"rgba(255,255,255,.55)\"/>' +\n    '<g clip-path=\"url(#c' + gid + ')\">' +\n    (p == null ? '<rect x=\"0\" y=\"0\" width=\"90\" height=\"' + h + '\" fill=\"#eeeeee\"/>' :\n      '<g class=\"ola\"><path fill=\"' + col + '\" fill-opacity=\".85\" d=\"M-90 ' + y + ' Q-67 ' + (y - 4) + ' -45 ' + y + ' T0 ' + y + ' T45 ' + y + ' T90 ' + y + ' T135 ' + y + ' T180 ' + y + ' V' + (h + 10) + ' H-90 Z\"/></g>') +\n    '</g>' + marcas +\n    '<path d=\"M6 6 Q10 12 16 12 L16 106 Q16 112 22 112 L68 112 Q74 112 74 106 L74 12 Q78 12 80 8\" fill=\"none\" stroke=\"#5d5d5d\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>' +\n    '<line x1=\"22\" y1=\"20\" x2=\"22\" y2=\"100\" stroke=\"#ffffff\" stroke-opacity=\".7\" stroke-width=\"3\" stroke-linecap=\"round\"/>' +\n    '</svg>';\n};\nconst nube = (txt) => '<div class=\"nube\">&#9729; <b>Falta definir:</b> ' + esc(txt) + '</div>';\nconst supuesto = (txt) => '<div class=\"supuesto\">Supuesto para la maqueta: ' + esc(txt) + '</div>';\nconst alerta = (txt) => '<div class=\"alerta\">&#9888; ' + esc(txt) + '</div>';\nconst mini = (titulo, p, detalle) => '<div class=\"mini\">' + vaso(p, 44) + '<div class=\"mtit\">' + esc(titulo) + '</div><div class=\"mpct\">' + (p == null ? '-' : p + '% pend.') + '</div>' + (detalle ? '<div class=\"mdet\">' + esc(detalle) + '</div>' : '') + '</div>';\nconst flecha = '<div class=\"flecha\">&#8594;</div>';\nconst lista = (titulo, items) => '<h4>' + esc(titulo) + '</h4>' + (items.length ? '<ul>' + items.map(t => '<li>' + t + '</li>').join('') + '</ul>' : '<p class=\"ok\">Nada pendiente.</p>');\nconst proxVto = (filtro) => cal.filter(filtro).map(r => {\n  const fechas = ['ARCA', 'AGIP', 'ARBA'].map(k => ({ org: k, f: iso(r[k]) })).filter(x => x.f && x.f.length === 10);\n  const tv = r.terminacion_cuit; let term = tv;\n  if (typeof tv === \"number\") { const d = new Date(Math.round((tv - 25569) * 86400000)); term = (d.getUTCMonth() + 1) + \"-\" + d.getUTCDate(); }\n  return fechas.map(x => ({ imp: r.impuesto, term: term, org: x.org, f: x.f }));\n}).flat().filter(x => x.f >= HOY).sort((a, b) => a.f < b.f ? -1 : 1);\n\n// ---------- 1. IMPUESTOS ----------\nconst imp = (() => {\n  if (!carga.length) return null;\n  const num = (v) => (v === '' || v == null) ? 3 : Number(v);\n  const finCarga = (r) => String(r.Estado_Carga || '').toUpperCase().indexOf('FINALIZ') >= 0;\n  const cod = (r) => r.CUIT ? codigo('emp', r.CUIT) : 'empresa' + r.ID_Empresa;\n  const presPend = carga.filter(r => num(r.ESTADO_GENERAL) !== 1);\n  const cargaPend = carga.filter(r => !finCarga(r));\n  const monoEnv = mono.filter(r => si(r.envia_vep));\n  const monoPend = monoEnv.filter(r => !si(r.vep_enviado));\n  const total = carga.length + monoEnv.length;\n  const pend = presPend.length + monoPend.length;\n  const p = pct(pend, total);\n  const incons = carga.filter(r => num(r.ESTADO_GENERAL) !== 3 && !finCarga(r));\n  const vtos = proxVto(r => ['IVA', 'IIBB', 'Monotributo'].indexOf(String(r.impuesto)) >= 0).slice(0, 4);\n  const det =\n    '<div class=\"cadena\">' + mini('Carga de comprobantes', pct(cargaPend.length, carga.length), (carga.length - cargaPend.length) + '/' + carga.length + ' cargados') + flecha +\n    mini('Presentación en ARCA', pct(presPend.length, carga.length), (carga.length - presPend.length) + '/' + carga.length + ' presentados') + '</div>' +\n    incons.map(r => alerta(cod(r) + ': presentación avanzada con la carga sin terminar')).join('') +\n    lista('Pendientes de carga (' + cargaPend.length + ')', cargaPend.map(r => '<b>' + esc(cod(r)) + '</b>')) +\n    lista('Pendientes de presentación (' + presPend.length + ')', presPend.map(r => '<b>' + esc(cod(r)) + '</b> · ' + (num(r.ESTADO_GENERAL) === 2 ? 'en proceso' : 'sin comenzar') + (finCarga(r) ? ' · carga lista' : ''))) +\n    lista('Monotributos: VEP sin enviar (' + monoPend.length + ' de ' + monoEnv.length + ')', monoPend.map(r => '<b>' + esc(codigo(r.apellido, r.CUIT)) + '</b> · cat. ' + esc(r.categoria))) +\n    '<h4>Alertas de la IA (último control)</h4><p>' + esc(ult.cantidad_alertas != null ? ult.cantidad_alertas + ' alertas · riesgo ' + (ult.nivel_riesgo_predominante || '-') : 'Sin control registrado') + '</p>' +\n    (ult.resumen_claude ? '<p class=\"ia\">' + esc(String(ult.resumen_claude).slice(0, 600)) + '</p>' : '') +\n    lista('Próximos vencimientos', vtos.map(v => esc(v.imp) + ' (term. ' + esc(v.term) + ') · ' + v.org + ' · <b>' + dmy(v.f) + '</b>'));\n  return { p, sub: pend + ' de ' + total + ' clientes sin presentar', det };\n})();\n\n// ---------- 3. SUELDOS ----------\nconst PASOS_S = [['novedades_recibidas', 'Novedades recibidas'], ['liquidacion_hecha', 'Liquidación hecha'], ['asiento_generado', 'Asiento generado'], ['f931_presentado', 'F931 presentado'], ['vep_enviado', 'VEP enviado']];\nconst sueldos = (() => {\n  if (!sue.length) return null;\n  const t = sue.length;\n  const pend = sue.filter(r => !si(r.vep_enviado));\n  const periodo = sue[0].periodo ? String(sue[0].periodo).replace(/^'/, '') : '';\n  const cod = (r) => codigo(r.apellido_razon_social, r.CUIT);\n  const cadena = PASOS_S.map((ps, i) => mini(ps[1], pct(sue.filter(r => !si(r[ps[0]])).length, t))).join(flecha);\n  const incons = [];\n  sue.forEach(r => { for (let i = 1; i < PASOS_S.length; i++) { if (si(r[PASOS_S[i][0]]) && !si(r[PASOS_S[i - 1][0]])) incons.push(cod(r) + ': \"' + PASOS_S[i][1] + '\" marcado sin \"' + PASOS_S[i - 1][1] + '\"'); } });\n  const pasoActual = (r) => { for (let i = 0; i < PASOS_S.length; i++) { if (!si(r[PASOS_S[i][0]])) return 'falta: ' + PASOS_S[i][1].toLowerCase(); } return ''; };\n  const vto = proxVto(r => String(r.impuesto).indexOf('F931') >= 0)[0];\n  const det = '<div class=\"cadena cinco\">' + cadena + '</div>' + incons.map(alerta).join('') +\n    lista('Clientes con VEP sin enviar (' + pend.length + ')', pend.map(r => '<b>' + esc(cod(r)) + '</b> · ' + esc(pasoActual(r)) + ' · ' + esc(r.responsable || 'sin responsable'))) +\n    '<h4>Próximo vencimiento F931</h4><p>' + (vto ? 'Terminación ' + esc(vto.term) + ' · <b>' + dmy(vto.f) + '</b>' : 'Sin fecha cargada') + '</p>' +\n    nube('cómo incluir las liquidaciones de empleadas domésticas.');\n  return { p: pct(pend.length, t), sub: pend.length + ' de ' + t + ' VEP sin enviar', titulo: 'Sueldos' + (periodo ? ' – período ' + periodo : ''), det };\n})();\n\n// ---------- 4. BALANCES ----------\nconst PASOS_B = [['prebalance', 'Prebalance'], ['formato_legal', 'Formato legal'], ['legalizado', 'Legalizado'], ['subido_arca', 'Subido a ARCA']];\nconst MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];\nconst balances = (() => {\n  if (!bal.length) return null;\n  const cod = (r) => codigo(r.razon_social, r.CUIT);\n  const grado = (r) => {\n    const ds = doc.filter(d => String(d.CUIT) === String(r.CUIT) && String(d.ejercicio) === String(r.ejercicio));\n    const ap = ds.filter(d => String(d.estado).toLowerCase() !== 'no aplica');\n    if (!ap.length) return null;\n    const pts = ap.reduce((s, d) => s + (String(d.estado).toLowerCase() === 'recibido' ? 1 : (String(d.estado).toLowerCase() === 'parcial' ? 0.5 : 0)), 0);\n    return Math.round((pts / ap.length) * 100);\n  };\n  const cerrados = bal.filter(r => iso(r.fecha_cierre) && iso(r.fecha_cierre) < HOY);\n  const pend = cerrados.filter(r => !si(r.subido_arca));\n  const incons = [];\n  bal.forEach(r => { for (let i = 1; i < PASOS_B.length; i++) { if (si(r[PASOS_B[i][0]]) && !si(r[PASOS_B[i - 1][0]])) incons.push(cod(r) + ': \"' + PASOS_B[i][1] + '\" marcado sin \"' + PASOS_B[i - 1][1] + '\"'); } });\n  const linea = MESES.map((m, i) => {\n    const rs = bal.filter(r => Number(r.mes_cierre) === i + 1);\n    if (!rs.length) return '<div class=\"mes\"><span class=\"pt vacio\"></span>' + m + '</div>';\n    const abierto = rs.every(r => !(iso(r.fecha_cierre) < HOY));\n    const listo = rs.every(r => si(r.subido_arca));\n    const cls = abierto ? 'futuro' : (listo ? 'listo' : 'pend');\n    return '<div class=\"mes\"><span class=\"pt ' + cls + '\">' + rs.length + '</span>' + m + '</div>';\n  }).join('');\n  const paso = (r) => { for (let i = 0; i < PASOS_B.length; i++) { if (!si(r[PASOS_B[i][0]])) return 'falta: ' + PASOS_B[i][1].toLowerCase(); } return ''; };\n  const det = '<h4>Cierres del año</h4><div class=\"linea\">' + linea + '</div><div class=\"ley\"><span class=\"pt listo\"></span>terminado <span class=\"pt pend\"></span>pendiente <span class=\"pt futuro\"></span>todavía no cerró</div>' +\n    '<div class=\"cadena\">' + PASOS_B.map(ps => mini(ps[1], pct(cerrados.filter(r => !si(r[ps[0]])).length, cerrados.length))).join(flecha) + '</div>' +\n    incons.map(alerta).join('') +\n    lista('Balances cerrados y pendientes (' + pend.length + ')', pend.map(r => {\n      const g = grado(r);\n      return '<b>' + esc(cod(r)) + '</b> · cierre ' + dmy(r.fecha_cierre) + ' · ' + esc(paso(r)) + ' · ' + esc(r.responsable || '') +\n        '<div class=\"barra\"><span style=\"width:' + (g || 0) + '%\"></span></div><small>Documentación recibida: ' + (g == null ? 'sin datos' : g + '%') + ' · vence ' + dmy(r.fecha_limite) + '</small>';\n    })) +\n    supuesto('la lista de documentos para el balance (extractos, ventas extraordinarias, retenciones, etc.) se ajusta con datos reales.');\n  return { p: pct(pend.length, cerrados.length), sub: pend.length + ' de ' + cerrados.length + ' balances cerrados sin terminar', det };\n})();\n\n// ---------- 5. INSPECCIONES ----------\nconst inspecciones = (() => {\n  if (!ins.length) return null;\n  const grupos = {};\n  ins.forEach(r => { (grupos[r.codigo_inspeccion] = grupos[r.codigo_inspeccion] || []).push(r); });\n  const abiertas = Object.keys(grupos).filter(k => grupos[k].some(r => !si(r.hecho)));\n  const puntos = abiertas.map(k => grupos[k]).flat();\n  const pend = puntos.filter(r => !si(r.hecho));\n  const det = abiertas.map(k => {\n    const g = grupos[k], hechos = g.filter(r => si(r.hecho)).length, a = g[0];\n    return '<div class=\"insp\"><div class=\"ih\"><b>' + esc(k) + '</b> · ' + esc(codigo(a.razon_social, a.CUIT)) + ' · ' + esc(a.organismo) + '<span>vence ' + dmy(a.fecha_limite) + '</span></div>' +\n      '<div class=\"barra\"><span style=\"width:' + pct(hechos, g.length) + '%\"></span></div><small>' + hechos + ' de ' + g.length + ' puntos hechos</small>' +\n      '<ul>' + g.filter(r => !si(r.hecho)).map(r => '<li>' + esc(r.punto) + ' · ' + esc(r.responsable) + '</li>').join('') + '</ul></div>';\n  }).join('') || '<p class=\"ok\">No hay inspecciones abiertas.</p>';\n  return { p: pct(pend.length, puntos.length), sub: abiertas.length + ' inspecciones abiertas · ' + pend.length + ' puntos pendientes', det };\n})();\n\n// ---------- tarjetas ----------\nconst tarjetas = [\n  { n: 1, titulo: 'Impuestos', ritmo: 'Mensual', d: imp },\n  { n: 2, titulo: 'Legales (Actas)', ritmo: 'Trimestral', d: null, nube: 'qué actas se hacen cada trimestre y los pasos del estudio hasta terminar un acta.' },\n  { n: 3, titulo: sueldos ? sueldos.titulo : 'Sueldos', ritmo: 'Mensual', d: sueldos },\n  { n: 4, titulo: 'Balances', ritmo: 'Anual', d: balances },\n  { n: 5, titulo: 'Inspecciones', ritmo: 'Eventual', d: inspecciones },\n  { n: 6, titulo: 'Módulo reservado', ritmo: '', d: null, nube: 'qué módulo ocupa este lugar.', reservada: true },\n];\nconst tarjetaHtml = (t) => {\n  const p = t.d ? t.d.p : null;\n  const frente = (t.reservada ? '<div class=\"nubegrande\">&#9729;</div>' : vaso(p)) +\n    '<div class=\"info\"><div class=\"ritmo\">' + esc(t.ritmo) + '</div><h2>' + esc(t.titulo) + '</h2>' +\n    (t.reservada ? '<div class=\"est\">Falta definir</div>' : '<div class=\"pct\" style=\"color:' + (p == null ? '#9e9e9e' : '#333') + '\">' + (p == null ? '–' : p + '%') + '<small>' + (p == null ? '' : ' pendiente') + '</small></div><div class=\"est\"><span class=\"dot\" style=\"background:' + color(p) + '\"></span>' + estado(p) + '</div>') +\n    (t.d ? '<div class=\"sub\">' + esc(t.d.sub) + '</div>' : '') + '</div>';\n  const detalle = '<div class=\"dhead\">' + vaso(p, 60) + '<div><div class=\"ritmo\">' + esc(t.ritmo) + '</div><h2>' + esc(t.titulo) + '</h2><div class=\"pct\">' + (p == null ? 'Sin datos todavía' : p + '% pendiente') + '</div></div></div>' +\n    (t.d ? t.d.det : '<p>Sin datos todavía. No se muestra ningún porcentaje inventado.</p>') + (t.nube ? nube(t.nube) : '');\n  return '<button class=\"card' + (t.reservada ? ' reservada' : '') + '\" data-n=\"' + t.n + '\">' + frente + '</button><template id=\"det' + t.n + '\">' + detalle + '</template>';\n};\n\nconst css = [\n  '*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(to right,#bfa77f 0,#bfa77f 7%,#f5ecd9 7%,#f5ecd9 93%,#bfa77f 93%,#bfa77f 100%);font-family:Calibri,Arial,sans-serif;color:#333}header,main,footer{width:86%;max-width:none!important;margin-left:7%!important;margin-right:7%!important}',\n  'header{padding:18px 16px 6px;max-width:1100px;margin:auto}h1{font-size:22px;margin:0 0 4px}',\n  '.meta{font-size:13px;color:#6d6d6d}.ficticio{display:inline-block;margin-top:6px;background:#fff3cd;border:1px solid #f0d58c;border-radius:12px;padding:2px 10px;font-size:12px}',\n  'main{display:grid;grid-template-columns:1fr;gap:14px;padding:14px 16px;max-width:1100px;margin:auto}',\n  '@media(min-width:700px){main{grid-template-columns:1fr 1fr}}',\n  '.card{display:flex;align-items:center;gap:14px;background:#fff;border:0;border-radius:18px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.08);text-align:left;cursor:pointer;font:inherit;color:inherit;width:100%}',\n  '.card:active{transform:scale(.99)}.card.reservada{border:2px dashed #cfc6b0;box-shadow:none;background:#fffdf8}',\n  '.info{flex:1;min-width:0}.ritmo{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#8a8a8a}',\n  'h2{font-size:19px;margin:2px 0 4px}.pct{font-size:30px;font-weight:700}.pct small{font-size:14px;font-weight:400;color:#777}',\n  '.est{font-size:14px;margin-top:2px}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:middle;border:1px solid rgba(0,0,0,.15)}',\n  '.sub{font-size:13px;color:#666;margin-top:4px}.nubegrande{font-size:64px;color:#cfc6b0;width:74px;text-align:center}',\n  '.ola{animation:ola 4s linear infinite}@keyframes ola{from{transform:translateX(0)}to{transform:translateX(90px)}}',\n  '#velo{position:fixed;inset:0;background:rgba(30,30,30,.6);display:none;align-items:center;justify-content:center;padding:12px;z-index:9}',\n  '#velo.abierto{display:flex}#caja{background:#fff;border-radius:18px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:18px;position:relative}',\n  '#cerrar{position:absolute;top:8px;right:10px;border:0;background:#eee;border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer}',\n  '.dhead{display:flex;gap:12px;align-items:center;margin-bottom:8px}.dhead .pct{font-size:20px}',\n  'h4{margin:14px 0 6px;font-size:15px}ul{margin:0;padding-left:18px}li{margin:4px 0;font-size:14px}.ok{color:#2e7d32;font-size:14px}',\n  '.cadena{display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;gap:4px;margin:6px 0}.mini{width:104px;text-align:center}',\n  '.mtit{font-size:12px;font-weight:700}.mpct,.mdet{font-size:11px;color:#666}.flecha{align-self:center;font-size:20px;color:#999}',\n  '.alerta{background:#fdecea;border-left:4px solid #e53935;padding:6px 10px;border-radius:6px;font-size:13px;margin:6px 0}',\n  '.nube{background:#f3f6fb;border:1px dashed #9db3d6;border-radius:14px;padding:8px 12px;font-size:13px;margin:12px 0 4px;color:#3b5276}',\n  '.supuesto{background:#fff8e1;border:1px dashed #e0b84d;border-radius:14px;padding:8px 12px;font-size:13px;margin:12px 0 4px}',\n  '.ia{font-size:13px;color:#555;background:#faf7f0;border-radius:8px;padding:8px}',\n  '.barra{height:8px;background:#eee;border-radius:5px;overflow:hidden;margin:4px 0 2px}.barra span{display:block;height:100%;background:#7cb342}',\n  '.linea{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}@media(min-width:520px){.linea{grid-template-columns:repeat(12,1fr)}}',\n  '.mes{text-align:center;font-size:11px}.pt{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:11px;color:#fff;margin:0 auto 2px;vertical-align:middle}',\n  '.mes .pt{display:flex}.pt.listo{background:#43a047}.pt.pend{background:#e53935}.pt.futuro{background:#bdbdbd}.pt.vacio{background:#f0f0f0}',\n  '.ley{font-size:11px;color:#666;margin-top:6px}.ley .pt{width:10px;height:10px;margin:0 3px 0 8px}',\n  '.insp{border:1px solid #eee;border-radius:12px;padding:8px 10px;margin:8px 0}.ih{font-size:14px}.ih span{float:right;font-size:12px;color:#777}',\n  'footer{max-width:1100px;margin:auto;padding:4px 16px 24px;font-size:12px;color:#777}.esc{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:4px 0;max-width:320px}',\n  '.btn{display:inline-block;margin-top:8px;padding:8px 14px;border-radius:20px;background:#333;color:#fff;text-decoration:none;font-size:13px}',\n].join('');\n\nconst escala = '<div class=\"esc\">' + [0, 25, 50, 75, 100].map(p => '<span style=\"flex:1;background:' + color(p) + '\"></span>').join('') + '</div><div>0% (al día) &rarr; 100% (todo pendiente)</div>';\nconst js = \"var v=document.getElementById('velo'),c=document.getElementById('contenido');\" +\n  \"document.querySelectorAll('.card').forEach(function(b){b.addEventListener('click',function(){c.innerHTML=document.getElementById('det'+b.dataset.n).innerHTML;v.classList.add('abierto');});});\" +\n  \"function cerrar(){v.classList.remove('abierto');}document.getElementById('cerrar').onclick=cerrar;\" +\n  \"v.addEventListener('click',function(e){if(e.target===v)cerrar();});document.addEventListener('keydown',function(e){if(e.key==='Escape')cerrar();});\";\n\nconst html = '<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n  '<meta http-equiv=\"refresh\" content=\"1800\"><title>Tablero de Control Contable y Auditoría</title><style>' + css + '</style></head><body>' +\n  '<header><h1>Tablero de Control Contable y Auditoría</h1><div class=\"meta\">Actualizado: ' + $now.setZone('America/Argentina/Buenos_Aires').toFormat('dd/MM/yyyy HH:mm') +\n  ' · Último control IA: ' + esc(fmtHora(ult.fecha_hora)) + '</div><span class=\"ficticio\">Datos ficticios · entregable de diplomatura</span></header>' +\n  '<main>' + tarjetas.map(tarjetaHtml).join('') + '</main>' +\n  '<footer>El vaso muestra el trabajo pendiente del estudio: lleno = 100% pendiente, vacío = todo hecho. Tocá una tarjeta para ver el detalle.' + escala +\n  '<div style=\"margin-top:8px\">Los clientes se identifican con un código (3 letras + últimos 4 dígitos del CUIT). No se muestran nombres, CUIT completos ni claves.</div>' +\n  '<a class=\"btn\" href=\"https://cambonconsultores-my.sharepoint.com/\" target=\"_blank\" rel=\"noopener\">Ver en Excel (requiere inicio de sesión Microsoft)</a></footer>' +\n  '<div id=\"velo\"><div id=\"caja\"><button id=\"cerrar\" aria-label=\"Cerrar\">&times;</button><div id=\"contenido\"></div></div></div>' +\n  '<script>' + js + '</script></body></html>';\n\nreturn [{ json: { html, impuestos: imp && imp.p, sueldos: sueldos && sueldos.p, balances: balances && balances.p, inspecciones: inspecciones && inspecciones.p } }];\n"
+      },
+      "id": "116bd7e3-2a6d-4140-89db-d81c50b6085b",
+      "name": "Armar Tablero de Vasos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        752,
+        0
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "0d7816bd-735a-4be0-a1f6-0d801789da54",
+      "name": "Mostrar Pagina",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        976,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Abrir Tablero (link)": {
+      "main": [
+        [
+          {
+            "node": "Leer Carga Operativa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Carga Operativa": {
+      "main": [
+        [
+          {
+            "node": "Leer Historico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Historico": {
+      "main": [
+        [
+          {
+            "node": "Leer Balances",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Balances": {
+      "main": [
+        [
+          {
+            "node": "Leer Documentacion Balances",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Documentacion Balances": {
+      "main": [
+        [
+          {
+            "node": "Leer Sueldos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Sueldos": {
+      "main": [
+        [
+          {
+            "node": "Leer Inspecciones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Inspecciones": {
+      "main": [
+        [
+          {
+            "node": "Leer Monotributos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Monotributos": {
+      "main": [
+        [
+          {
+            "node": "Leer Calendario ARCA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Calendario ARCA": {
+      "main": [
+        [
+          {
+            "node": "Armar Tablero de Vasos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar Tablero de Vasos": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Pagina",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "cc38a4c6-2c5c-4519-b3ed-2b58ef333c83",
+  "meta": {
+    "instanceId": "4e5e1fe020513dd77bded423b5cb97510cb4c1602c7b98ae070d9fd30beb34cc"
+  },
+  "nodeGroups": [
+    {
+      "id": "b9bda458-46fd-4dbb-b26b-2025ab5e4d1a",
+      "name": "Leer datos del estudio",
+      "nodeIds": [
+        "78fee47c-f085-432a-acdc-15d4587e8902",
+        "6477a06d-c047-40b9-a062-4ad0a55196c6",
+        "c926c01d-2436-4328-a7a2-f4347eba2081",
+        "9d890ff3-8554-4f8b-b50d-d7ed764e9aca",
+        "345362c8-f679-4e3c-a843-b5951f0218ff",
+        "a73201f6-1de8-4948-ba34-89d8d6f64109",
+        "ca1aa68f-5ab1-41e6-874a-c1c7e1156d61",
+        "6e7c9ed7-c58f-4a6a-ba53-10f8a640856b"
+      ],
+      "description": "Trae del Excel maestro la carga impositiva, el histórico de la IA y las hojas de Balances, Sueldos, Inspecciones y Calendario"
+    },
+    {
+      "id": "5fa28649-2fce-4146-9bf2-0abb5cb26229",
+      "name": "Armar y mostrar tablero",
+      "nodeIds": [
+        "116bd7e3-2a6d-4140-89db-d81c50b6085b",
+        "0d7816bd-735a-4be0-a1f6-0d801789da54"
+      ],
+      "description": "Calcula lo pendiente de cada módulo con códigos de cliente y devuelve la página de 6 tarjetas al navegador"
+    }
+  ],
+  "id": "wCbpg9GZdzR58We5",
+  "tags": []
+}
